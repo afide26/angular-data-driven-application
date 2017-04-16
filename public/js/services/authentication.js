@@ -25,6 +25,9 @@ myApp.factory('Authentication', ['$rootScope',
                       $rootScope.message = error.message
                     })//signInWithEmailAndPassword
                   },//login
+                  logout:function(){
+                    auth.$signOut();
+                  },
                   register: function(user){
                     auth.$createUserWithEmailAndPassword(
                       user.email,
