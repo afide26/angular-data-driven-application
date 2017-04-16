@@ -1,12 +1,29 @@
 myApp.factory('Authentication', ['$rootScope',
-              '$firebase', '$firebaseAuth',
-              function($rootScope, $firebase, $firebaseAuth){
+              '$location','$firebaseObject','$firebaseAuth',
+              function($rootScope, $location,$firebaseObject, $firebaseAuth){
                 var ref = firebase.database().ref();
                 var auth = $firebaseAuth();
 
+                auth.$onAuthStateChanged(function(authUser){
+                  if(authUser){
+                    var userRef = ref.child('users').child(authUser.uid);
+                    var userObj = $firebaseObject(userRef);
+                    $rootScope.currentUser = userObj;
+                  }else{
+                    $rootScope.currentUser = '';
+                  }
+                });
+
                 return {
-                  login: function(){
-                    $rootScope.message= "Welcome " + $rootScope.user.email;
+                  login: function(user){
+                    auth.$signInWithEmailAndPassword(
+                      user.email,
+                      user.password
+                    ).then(function(user){
+                      $location.path('/success');
+                    }).catch(function(error){
+                      $rootScope.message = error.message
+                    })//signInWithEmailAndPassword
                   },//login
                   register: function(user){
                     auth.$createUserWithEmailAndPassword(
