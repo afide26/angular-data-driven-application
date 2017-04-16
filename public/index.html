@@ -12,6 +12,25 @@
   <script src="js/lib/angular/angular.min.js"></script>
   <script src="js/lib/angular/angular-route.min.js"></script>
   <script src="js/lib/angular/angular-animate.min.js"></script>
+
+  <!-- Firebase Scripts -->
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBuzPXNWXOuQUXhQ3npPPwoYLbGC48g0dg",
+      authDomain: "angregistration17.firebaseapp.com",
+      databaseURL: "https://angregistration17.firebaseio.com",
+      projectId: "angregistration17",
+      storageBucket: "angregistration17.appspot.com",
+      messagingSenderId: "1052391111526"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
   <!-- Scripts -->
   <script src="js/app.js"></script>
   <script src="js/controllers/registration.js"></script>
