@@ -1,8 +1,9 @@
   <div ng-controller="RegistrationController">
     <div class="branding"><a ng-href="#/">angularJS</a></div>
     <ul>
-      <li ng-hide="currentUser"><a ng-href="#/login">Login</a></li>
-      <li ng-hide="!currentUser"><a ng-href="#/logout" ng-click="logout()">Logout</a></li>
-      <li ng-hide="currentUser"><a ng-href="#/register">Register</a></li>
+      <li ng-hide="currentUser"><a ng-href="#/login"><i class="fa fa-sign-in"></i> Login</a></li>
+      <li ng-hide="!currentUser"><a ng-href="#/logout" ng-click="logout()"><i class="fa fa-sign-in"></i> Logout</a></li>
+      <li id="large-welcome" ng-hide="!currentUser"><a ng-href="#/logout" ng-click="logout()"><i class="fa fa-user"></i> Welcome Back {{currentUser.firstname}} </a></li>
+      <li ng-hide="currentUser"><a ng-href="#/register"><i class="fa fa-address-book"></i> Register</a></li>
     </ul>
   </div>

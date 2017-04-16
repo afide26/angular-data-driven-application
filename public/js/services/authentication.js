@@ -4,6 +4,7 @@ myApp.factory('Authentication', ['$rootScope',
                 var ref = firebase.database().ref();
                 var auth = $firebaseAuth();
 
+                var myObj;
                 auth.$onAuthStateChanged(function(authUser){
                   if(authUser){
                     var userRef = ref.child('users').child(authUser.uid);
@@ -14,7 +15,7 @@ myApp.factory('Authentication', ['$rootScope',
                   }
                 });
 
-                return {
+                myObj = {
                   login: function(user){
                     auth.$signInWithEmailAndPassword(
                       user.email,
@@ -25,9 +26,13 @@ myApp.factory('Authentication', ['$rootScope',
                       $rootScope.message = error.message
                     })//signInWithEmailAndPassword
                   },//login
-                  logout:function(){
-                    auth.$signOut();
+                  logout:function(user){
+                    auth.$signOut(user);
                   },
+
+                  requireAuth: function(){
+                    return auth.$requireSignIn();
+                  },//require Authentication
                   register: function(user){
                     auth.$createUserWithEmailAndPassword(
                       user.email,
@@ -41,10 +46,11 @@ myApp.factory('Authentication', ['$rootScope',
                             lastname: user.lastname,
                             email: user.email
                           })
-                      $rootScope.message= "Hi " + user.firstname + " , Thanks for registering.";
+                      myObj.login(user);
                     }).catch(function(error){
                       $rootScope.message = error.message
                     }); //createUserWithEmailAndPassword
                   }//register
                 }
+                return myObj;
               }])

@@ -1,3 +1,3 @@
-myApp.controller('SuccessController',['$scope', function($scope){
-  $scope.message = 'Congratulations Alan! You have succeeded in your application!!!'
+myApp.controller('SuccessController', ['$scope', function($scope){
+  $scope.message = "Welcome back";
 }])
